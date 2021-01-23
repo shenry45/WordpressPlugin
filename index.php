@@ -21,6 +21,7 @@
         }
 
         add_action( 'admin_menu', 'test_admin');
+        add_action( 'admin_init', 'update_test_admin' );
     }
 
     if ( !function_exists("test_admin_page") ) {
@@ -42,6 +43,12 @@
             <?php submit_button(); ?>
             </form>
             <?php
+        }
+    }
+
+    if ( !function_exists( "update_test_admin" ) ) {
+        function update_test_admin() {
+            register_setting( 'test_admin_settings', 'test_admin_info' );
         }
     }
 
