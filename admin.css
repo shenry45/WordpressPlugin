@@ -1,0 +1,8 @@
+.test_admin.container {
+    width: 70%;
+}
+.test_admin form {
+    padding: 20px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+}
