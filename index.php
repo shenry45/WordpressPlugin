@@ -9,11 +9,11 @@
 
     if ( !function_exists("test_admin") ) {
         function test_admin() {
-            add_menu_page( 'Development Testing Menu Page', 'Test Menu', 'manage_options', 'test-menu', 'test_admin_page', 'dashicons-media-code', '75' );
+            add_menu_page( 'Development Testing Menu Page', 'Test', 'manage_options', 'test-menu', 'test_admin_page', 'dashicons-media-code', '75' );
             add_submenu_page( 'test-menu', 'Main Page', 'Main Menu', 'manage_options', 'test-sub-menu', 'test_admin_page' );
             add_submenu_page( 'test-menu', 'Sub Menu Page', 'Sub Menu', 'manage_options', 'test-sub-sec', 'test_admin_sub_page' );
 
-            // remove_submenu_page( 'test-menu' );
+            remove_submenu_page( 'test-menu', 'test-menu' );
         }
 
         add_action( 'admin_menu', 'test_admin' );
