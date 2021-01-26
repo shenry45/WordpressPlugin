@@ -1,8 +1,19 @@
 .test_admin.container {
     width: 70%;
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.test_admin p.description, .test_admin h1 {
+    margin-bottom: 20px;
 }
 .test_admin form {
     padding: 20px;
     border: 1px solid #cacaca;
     border-radius: 5px;
+}
+.test_admin input {
+    display: block;
+    margin-bottom: 10px;
 }

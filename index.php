@@ -9,37 +9,47 @@
 
     if ( !function_exists("test_admin") ) {
         function test_admin() {
-            $page_title = 'Development Testing Menu Page';
-            $menu_title = 'Test Menu';
-            $capabile = 'manage_options';
-            $menu_slug = 'test-menu';
-            $function = 'test_admin_page';
-            $icon_url = 'dashicons-media-code';
-            $position = 75;
-            
-            add_menu_page( $page_title, $menu_title, $capabile, $menu_slug, $function, $icon_url, $position);
+            add_menu_page( 'Development Testing Menu Page', 'Test Menu', 'manage_options', 'test-menu', 'test_admin_page', 'dashicons-media-code', '75' );
+            add_submenu_page( 'test-menu', 'Main Page', 'Main Menu', 'manage_options', 'test-sub-menu', 'test_admin_page' );
+            add_submenu_page( 'test-menu', 'Sub Menu Page', 'Sub Menu', 'manage_options', 'test-sub-sec', 'test_admin_sub_page' );
+
+            // remove_submenu_page( 'test-menu' );
         }
 
-        add_action( 'admin_menu', 'test_admin');
+        add_action( 'admin_menu', 'test_admin' );
         add_action( 'admin_init', 'update_test_admin' );
+    }
+
+    if ( !function_exists("test_admin_sub_page") ) {
+        function test_admin_sub_page() {
+            ?>
+            <div>
+                <h1>Yay Sub Menu Page!</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quidem non tempora officia, optio ut quaerat expedita, tenetur iure quisquam laudantium aliquam vel accusantium nihil quis facere quibusdam aperiam dicta.</p>
+            </div>
+            <?php
+        }
     }
 
     if ( !function_exists("test_admin_page") ) {
         function test_admin_page() {
             ?>
             <div class="test_admin container">
-                <h1>Development Testing Menu Page</h1>
-                <p>Nulla purus enim, luctus eu quam ut, feugiat malesuada ipsum. Nunc pellentesque commodo urna, a eleifend lacus lacinia sed. Fusce faucibus odio ut libero ultricies efficitur. Sed finibus dolor aliquam, tristique enim fringilla, ultricies lectus. Aenean mi risus, maximus vel imperdiet ut, faucibus eu ligula.</p>
+                <h1>Sample Admin Menu Page</h1>
+                <p class="description">Here we have a display of an admin plugin page created with PHP. The basics of my skills are shown below leveraging actions, filters, and form submission. Please contact me if you like what you see!<br>My email: <a href="mailto:shawn45henry@gmail.com">shawn45henry@gmail.com</a></p>
                 <form method="post" action="options.php">
                 <?php settings_fields( 'test_admin_settings' ); ?>
                 <?php do_settings_sections( 'test_admin_settings' ); ?>
                     <table class="form-table">
+                        <h2>Fill out the Form</h2>
                         <tr valign="top">
                             <td>
-                                <label for="test_admin_info">Test Admin Info:</th>
-                                <input type="text" name="test_admin_info" value="<?php echo get_option( 'test_admin_info' ); ?>" />
-                                <label for="test_admin_email">Test Admin Email:</th>
-                                <input type="email" name="test_admin_email" value="<?php echo get_option( 'test_admin_email' ); ?>" />
+                                <label for="test_admin_info">Contact Info:</label>
+                                <input type="text" name="test_admin_info" size="35" value="<?php echo get_option( 'test_admin_info' ); ?>" />
+                                <label for="test_admin_email">Contact Email:</label>
+                                <input type="email" name="test_admin_email" size="35" value="<?php echo get_option( 'test_admin_email' ); ?>" />
+                                <label for="test_admin_date">Contact Start Date:</label>
+                                <input type="date" name="test_admin_date" size="35" value="<?php echo get_option( 'test_admin_date' ); ?>">
                             </td>
                         </tr>
                     </table>
@@ -54,6 +64,11 @@
         function update_test_admin() {
             register_setting( 'test_admin_settings', 'test_admin_info' );
             register_setting( 'test_admin_settings', 'test_admin_email' );
+            register_setting( 'test_admin_settings', 'test_admin_date', array(
+                'type' => 'string',
+                'description' => 'date logged'
+                )
+            );
         }
     }
 
