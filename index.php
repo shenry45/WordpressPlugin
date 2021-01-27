@@ -7,6 +7,18 @@
     License: GPL2
     */
 
+    /* INFO ADMIN NOTICE */
+    function test_admin_notice() {
+        ?>
+        <div class="notice notice-info">
+            <p><?php _e( 'Keep up the good work coding! I believe in you.', 'sample-text-domain' ); ?></p>
+        </div>
+        <?php
+    }
+    add_action( 'admin_notices', 'test_admin_notice' );
+    
+
+    /* ADMIN MENU */
     if ( !function_exists("test_admin") ) {
         function test_admin() {
             add_menu_page( 'Development Testing Menu Page', 'Test', 'manage_options', 'test-menu', 'test_admin_page', 'dashicons-media-code', '75' );
@@ -20,10 +32,11 @@
         add_action( 'admin_init', 'update_test_admin' );
     }
 
+    /* ADMIN PAGES */
     if ( !function_exists("test_admin_sub_page") ) {
         function test_admin_sub_page() {
             ?>
-            <div>
+            <div class="test_admin container">
                 <h1>Yay Sub Menu Page!</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quidem non tempora officia, optio ut quaerat expedita, tenetur iure quisquam laudantium aliquam vel accusantium nihil quis facere quibusdam aperiam dicta.</p>
             </div>
@@ -60,6 +73,7 @@
         }
     }
 
+    /* SAVE FIELDS */
     if ( !function_exists( "update_test_admin" ) ) {
         function update_test_admin() {
             register_setting( 'test_admin_settings', 'test_admin_info' );
@@ -72,6 +86,7 @@
         }
     }
 
+    /* ALLOW SUBMITTED CONTENT ON FRONT END */
     if ( !function_exists( "test_admin_info" ) ) {
         function test_admin_info($content) {
             $test_admin = get_option( 'test_admin_info' );
@@ -80,7 +95,7 @@
         add_filter( 'the_content', 'test_admin_info' );
     }
 
-    // Load in Admin CSS from plugin
+    /* CSS INIT */
     if ( !function_exists( "load_admin_style" ) ) {
         function load_admin_style() {
             wp_register_style( 'test-admin', plugins_url('wordpress-plugin/admin.css') );
