@@ -112,11 +112,12 @@
     if ( !function_exists( "test_admin_info" ) ) {
         function test_admin_info($content) {
             $button = array(
-                'link' => get_option( '' ),
-                'target' => get_option( '' )
+                'link' => get_option( 'admin_button_link' ),
+                'target' => get_option( 'admin_button_target' )
             );
+            $button_html = "<a href='$button[link]' target='$button[target]'><button>Click Me</button></a>";
             $test_admin = get_option( 'test_admin_info' ) . get_option( 'test_admin_date ');
-            return $content . $test_admin;
+            return $button_html . $test_admin . $content;
         }
         add_filter( 'the_content', 'test_admin_info' );
     }
