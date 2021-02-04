@@ -7,6 +7,11 @@
     License: GPL2
     */
 
+    // function load_admin_files() {
+        include( 'form.php' );
+    // }
+    // add_action( 'admin_enqueue_scripts', 'load_admin_files' );
+
     /* INFO ADMIN NOTICE */
     function test_admin_notice() {
         ?>
@@ -17,7 +22,6 @@
     }
     add_action( 'admin_notices', 'test_admin_notice' );
     
-
     /* ADMIN MENU */
     if ( !function_exists("test_admin") ) {
         function test_admin() {
@@ -29,6 +33,7 @@
         }
 
         add_action( 'admin_menu', 'test_admin' );
+        add_action( 'admin_init', 'update_test_admin' );
     }
 
     /* ALLOW SUBMITTED CONTENT ON FRONT END */
@@ -52,12 +57,7 @@
             wp_enqueue_style( 'test-admin' );
         }
 
-        function load_admin_files() {
-            include 'form.php';
-        }
-
         add_action( 'admin_enqueue_scripts', 'load_admin_style' );
-        add_action( 'admin_enqueue_scripts', 'load_admin_files' );
     }
 
 ?>

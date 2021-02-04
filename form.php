@@ -8,15 +8,17 @@
                 <h1>Yay Sub Menu Page!</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quidem non tempora officia, optio ut quaerat expedita, tenetur iure quisquam laudantium aliquam vel accusantium nihil quis facere quibusdam aperiam dicta.</p>
                 <form method="post" action="options.php">
-                    <?php settings_fields( 'admin_test' ); ?>
-                    <?php do_settings_sections( 'admin_test_section' ); ?>
-                        <table class="form-table">
+                    <?php
+                        settings_fields( 'admin_test' ); 
+                        do_settings_sections( 'admin_test' );
+                    ?>
+                    <table class="form-table">
                         <tr valign="top">
                             <td>
                                 <label for="admin_button_link">Link for redirect</label>
                                 <input type="text" name="admin_button_link" value="<?php echo get_option( 'admin_button_link' ); ?>"></input>
                                 <label for="admin_button_target">What should this button link to?</label>
-                                   <select name="admin_button_target" selected="<?php echo get_option( 'admin_button_target' ); ?>">
+                                <select name="admin_button_target" selected="<?php echo get_option( 'admin_button_target' ); ?>">
                                     <option value="_blank">New Window</option>
                                     <option value="_self">Replace the current page</option>
                                     <option value="_parent">New tab at the front of window</option>
@@ -38,8 +40,10 @@
                 <h1>Sample Admin Menu Page</h1>
                 <p class="description">Here we have a display of an admin plugin page created with PHP. The basics of my skills are shown below leveraging actions, filters, and form submission. Please contact me if you like what you see!<br>My email: <a href="mailto:shawn45henry@gmail.com">shawn45henry@gmail.com</a></p>
                 <form method="post" action="options.php">
-                    <?php settings_fields( 'admin_test' ); ?>
-                    <?php do_settings_sections( 'admin_test_section' ); ?>
+                    <?php
+                        settings_fields( 'admin_test' ); 
+                        do_settings_sections( 'admin_test' );
+                    ?>
                     <table class="form-table">
                         <h2>Fill out the Form</h2>
                         <tr valign="top">
@@ -63,26 +67,14 @@
     /* SAVE FIELDS */
     if ( !function_exists( "update_test_admin" ) ) {
         function update_test_admin() {
-            add_settings_section( 'admin_test_section', 'Example settings section in general', 'admin_test_settings_func', 'general' );
-
-            add_settings_field( 'admin_test', 'Admin Test', 'admin_test_settings', 'general', 'admin_test_section' );
-
             register_setting( 'admin_test', 'test_admin_info' );
             register_setting( 'admin_test', 'test_admin_email' );
             register_setting( 'admin_test', 'test_admin_date' );
 
             register_setting( 'admin_test', 'admin_button_link' );
             register_setting( 'admin_test', 'admin_button_target' );
-        }        
-        add_action( 'admin_init', 'update_test_admin' );
-    }
 
-    function admin_test_settings_func() {
-        echo '<p>Test admin settings section</p>';
-    }
-
-    function admin_test_settings() {
-        echo '<input name="admin_test id="admin_test" type="checkbox" value="1" /> Explanation text';
+        }
     }
 
 ?>
