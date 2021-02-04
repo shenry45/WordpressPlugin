@@ -9,8 +9,8 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quidem non tempora officia, optio ut quaerat expedita, tenetur iure quisquam laudantium aliquam vel accusantium nihil quis facere quibusdam aperiam dicta.</p>
                 <form method="post" action="options.php">
                     <?php
-                        settings_fields( 'admin_test' ); 
-                        do_settings_sections( 'admin_test' );
+                        settings_fields( 'admin_test_button' ); 
+                        do_settings_sections( 'admin_test_button' );
                     ?>
                     <table class="form-table">
                         <tr valign="top">
@@ -71,8 +71,8 @@
             register_setting( 'admin_test', 'test_admin_email' );
             register_setting( 'admin_test', 'test_admin_date' );
 
-            register_setting( 'admin_test', 'admin_button_link' );
-            register_setting( 'admin_test', 'admin_button_target' );
+            register_setting( 'admin_test_button', 'admin_button_link' );
+            register_setting( 'admin_test_button', 'admin_button_target' );
 
         }
     }
