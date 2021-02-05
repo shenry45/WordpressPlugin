@@ -7,10 +7,8 @@
     License: GPL2
     */
 
-    // function load_admin_files() {
-        include( 'form.php' );
-    // }
-    // add_action( 'admin_enqueue_scripts', 'load_admin_files' );
+    include( 'container.php' );
+    include( 'form.php' );
 
     /* INFO ADMIN NOTICE */
     function test_admin_notice() {
@@ -26,8 +24,26 @@
     if ( !function_exists("test_admin") ) {
         function test_admin() {
             add_menu_page( 'Development Testing Menu Page', 'Test', 'manage_options', 'test-menu', 'test_admin_page', 'dashicons-media-code', '75' );
-            add_submenu_page( 'test-menu', 'Main Page', 'Main Menu', 'manage_options', 'test-sub-menu', 'test_admin_page' );
-            add_submenu_page( 'test-menu', 'Sub Menu Page', 'Sub Menu', 'manage_options', 'test-sub-sec', 'test_admin_sub_page' );
+
+            $subpages = array(
+                array(
+                    'name' => 'Main Page',
+                    'title' => 'Main Menu',
+                    'alias' => 'test-sub-menu',
+                ),
+                array(
+                    'name' => 'Sub Menu Page',
+                    'title' => 'Sub Menu',
+                    'alias' => 'test-sub-sec'
+                )
+            );
+
+            foreach ($subpages as $page) {
+                add_submenu_page('test-menu', $page['name'], $page['title'], 'manage_options', $page['alias'], 'test_admin_container_callback');
+            }
+
+            // add_submenu_page( 'test-menu', 'Main Page', 'Main Menu', 'manage_options', 'test-sub-menu', 'test_admin_page' );
+            // add_submenu_page( 'test-menu', 'Sub Menu Page', 'Sub Menu', 'manage_options', 'test-sub-sec', 'test_admin_container_callback' );
 
             remove_submenu_page( 'test-menu', 'test-menu' );
         }
@@ -53,7 +69,7 @@
     /* CSS INIT */
     if ( !function_exists( "load_admin_style" ) ) {
         function load_admin_style() {
-            wp_register_style( 'test-admin', plugins_url( 'wordpress-plugin/admin.css' ) );
+            wp_register_style( 'test-admin', plugins_url( 'wordpress-plugin/assets/css/style.css' ) );
             wp_enqueue_style( 'test-admin' );
         }
 

@@ -1,38 +1,44 @@
 <?php
     
-    /* ADMIN PAGES */
+    /*
+    ----------
+    ADMIN PAGES WITH FORMS
+    ----------
+    */
+
+    // Admin to UI Information form
     if ( !function_exists("test_admin_sub_page") ) {
         function test_admin_sub_page() {
             ?>
-            <div class="test_admin container">
-                <h1>Yay Sub Menu Page!</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quidem non tempora officia, optio ut quaerat expedita, tenetur iure quisquam laudantium aliquam vel accusantium nihil quis facere quibusdam aperiam dicta.</p>
-                <form method="post" action="options.php">
-                    <?php
-                        settings_fields( 'admin_test_button' ); 
-                        do_settings_sections( 'admin_test_button' );
-                    ?>
-                    <table class="form-table">
-                        <tr valign="top">
-                            <td>
-                                <label for="admin_button_link">Link for redirect</label>
-                                <input type="text" name="admin_button_link" value="<?php echo get_option( 'admin_button_link' ); ?>"></input>
-                                <label for="admin_button_target">What should this button link to?</label>
-                                <select name="admin_button_target" selected="<?php echo get_option( 'admin_button_target' ); ?>">
-                                    <option value="_blank">New Window</option>
-                                    <option value="_self">Replace the current page</option>
-                                    <option value="_parent">New tab at the front of window</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                    <?php submit_button(); ?>
-                </form>
-            </div>
+            <h1>Yay Sub Menu Page!</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quidem non tempora officia, optio ut quaerat expedita, tenetur iure quisquam laudantium aliquam vel accusantium nihil quis facere quibusdam aperiam dicta.</p>
+            <form method="post" action="options.php">
+                <?php
+                    // match register_setting option name
+                    settings_fields( 'admin_test_button' ); 
+                    do_settings_sections( 'admin_test_button' );
+                ?>
+                <table class="form-table">
+                    <tr valign="top">
+                        <td>
+                            <label for="admin_button_link">Link for redirect</label>
+                            <input type="text" name="admin_button_link" value="<?php echo get_option( 'admin_button_link' ); ?>"></input>
+                            <label for="admin_button_target">What should this button link to?</label>
+                            <select name="admin_button_target" selected="<?php echo get_option( 'admin_button_target' ); ?>">
+                                <option value="_blank">New Window</option>
+                                <option value="_self">Replace the current page</option>
+                                <option value="_parent">New tab at the front of window</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <?php submit_button(); ?>
+            </form>
             <?php
         }
     }
 
+    // Admin to UI Button
     if ( !function_exists("test_admin_page") ) {
         function test_admin_page() {
             ?>
@@ -41,6 +47,7 @@
                 <p class="description">Here we have a display of an admin plugin page created with PHP. The basics of my skills are shown below leveraging actions, filters, and form submission. Please contact me if you like what you see!<br>My email: <a href="mailto:shawn45henry@gmail.com">shawn45henry@gmail.com</a></p>
                 <form method="post" action="options.php">
                     <?php
+                        // match register_setting option name
                         settings_fields( 'admin_test' ); 
                         do_settings_sections( 'admin_test' );
                     ?>
@@ -64,13 +71,15 @@
         }
     }
 
-    /* SAVE FIELDS */
+    // Saves form information
     if ( !function_exists( "update_test_admin" ) ) {
         function update_test_admin() {
+            // Information form fields
             register_setting( 'admin_test', 'test_admin_info' );
             register_setting( 'admin_test', 'test_admin_email' );
             register_setting( 'admin_test', 'test_admin_date' );
 
+            // Button UI form fields
             register_setting( 'admin_test_button', 'admin_button_link' );
             register_setting( 'admin_test_button', 'admin_button_target' );
 
