@@ -13,7 +13,7 @@
     border: 1px solid #cacaca;
     border-radius: 5px;
 }
-.test_admin input {
+.test_admin input, .test_admin select, .test_admin textarea {
     display: block;
     margin-bottom: 10px;
 }
